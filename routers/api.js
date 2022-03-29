@@ -20,6 +20,7 @@ router.get("/:date", async function (req, res) {
   if (Date.parse(time)) {
     // when a date format is used
     const noNumber = new Date(time);
+    noNumber.setMinutes(date.getMinutes()-3);
 
     function timeStamp(noNumber) {
       res.json({ unix: noNumber.getTime(), utc: noNumber.toUTCString() });
@@ -29,6 +30,7 @@ router.get("/:date", async function (req, res) {
     timeStamp(noNumber);
   } else {
     const utcDate = new Date(Number(time));
+    utcDate.setMinutes(date.getMinutes()-3);
     res.json({ unix: time, utc: utcDate.toUTCString() });
     return;
   }
